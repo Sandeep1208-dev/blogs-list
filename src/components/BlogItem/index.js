@@ -1,16 +1,24 @@
+import {Link} from 'react-router-dom'
 import './index.css'
 
-const BlogItem = ({blogsDetails}) => {
-  const {title, description, publishedDate} = blogsDetails
+const BlogItem = props => {
+  const {blogData} = props
+  const {id, title, imageUrl, avatarUrl, author, topic} = blogData
 
   return (
-    <li className="blog-item-container">
-      <div className="blog-details">
-        <h1 className="blog-title">{title}</h1>
-        <p className="blog-date">{publishedDate}</p>
+    <Link to={`/blogs/${id}`} className="blog-item-link">
+      <div className="blog-item-card">
+        <img className="blog-item-image" src={imageUrl} alt={title} />
+        <div className="blog-item-info">
+          <p className="blog-item-topic">{topic}</p>
+          <h1 className="blog-item-title">{title}</h1>
+          <div className="blog-item-author-row">
+            <img className="blog-item-avatar" src={avatarUrl} alt={author} />
+            <p className="blog-item-author">{author}</p>
+          </div>
+        </div>
       </div>
-      <p className="blog-description">{description}</p>
-    </li>
+    </Link>
   )
 }
 
